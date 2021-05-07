@@ -1,21 +1,46 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import { Ionicons } from '@expo/vector-icons';
+import Feeds from './Tabs/Feeds';
+import Profile from './Tabs/Profile';
 
-export default function App() {
+const Tab = createMaterialTopTabNavigator();
+
+function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+      <NavigationContainer>
+        <Tab.Navigator
+        tabBarOptions={{
+          tabStyle: {height:70, backgroundColor: '#3a474e'},
+          labelStyle: {color: 'white', fontSize: 16},
+          showIcon:true,
+          }}>
+          <Tab.Screen 
+            name="Feeds" 
+            component={Feeds}
+            options={{
+              tabBarIcon:() => {
+                <Ionicons name='home'
+                color='white'
+                size={24}/>
+              }
+            }}
+          />
+          <Tab.Screen 
+          name="Profile" 
+          component={Profile}
+          options={{
+            tabBarIcon:() => {
+              <Ionicons name='person'
+              color='white'
+              size={24}/>
+            }
+          }}
+          />
+        </Tab.Navigator>
+      </NavigationContainer>
+    )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
